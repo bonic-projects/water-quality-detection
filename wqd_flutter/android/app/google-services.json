@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "492451770445",
+    "project_id": "water-quality-detection-5ab50",
+    "storage_bucket": "water-quality-detection-5ab50.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492451770445:android:367a1efcf20542c8772c04",
+        "android_client_info": {
+          "package_name": "com.example.wqd_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ0MOOuWDBwyKJdgEhBP52xYmTN9cL8QI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
