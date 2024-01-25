@@ -1,5 +1,5 @@
 //PH sensor
-#define phPin 33
+#define phPin 13
 int phValue = 0;
 float phReading = 0;
 
@@ -7,7 +7,7 @@ float phReading = 0;
 #include <OneWire.h>
 #include <DallasTemperature.h>
 // // GPIO where the DS18B20 is connected to
-const int oneWireBus = 15;          
+const int oneWireBus = 32;          
 // Setup a oneWire instance to communicate with any OneWire devices
 OneWire oneWire(oneWireBus);
 // Pass our oneWire reference to Dallas Temperature sensor
@@ -19,7 +19,7 @@ float temperature;
 // #include <Adafruit_ADS1015.h>
 #include <DFRobot_ESP_EC.h>
 //Pin
-#define ecPin 32
+#define ecPin 14
 DFRobot_ESP_EC ec;
 // Adafruit_ADS1115 ads;
 float ecVoltage, ecValue = 0;
