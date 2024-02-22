@@ -55,6 +55,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '492451770445',
     projectId: 'water-quality-detection-5ab50',
     authDomain: 'water-quality-detection-5ab50.firebaseapp.com',
+    databaseURL: 'https://water-quality-detection-5ab50-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'water-quality-detection-5ab50.appspot.com',
   );
 
@@ -63,6 +64,7 @@ class DefaultFirebaseOptions {
     appId: '1:492451770445:android:367a1efcf20542c8772c04',
     messagingSenderId: '492451770445',
     projectId: 'water-quality-detection-5ab50',
+    databaseURL: 'https://water-quality-detection-5ab50-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'water-quality-detection-5ab50.appspot.com',
   );
 }

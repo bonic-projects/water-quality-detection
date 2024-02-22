@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gauge_indicator/gauge_indicator.dart';
 import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
 import 'package:wqd_flutter/ui/smart_widgets/online_status.dart';
@@ -21,18 +22,132 @@ class HomeView extends StatelessWidget {
               const IsOnlineWidget(),
               IconButton(
                   onPressed: model.logout, icon: const Icon(Icons.logout)),
-
             ],
           ),
-          body: GridView.count(
-            crossAxisCount: 2,
-            children: [
-
-            ],
-          ),
+          body: model.node != null
+              ? GridView.count(
+                  crossAxisCount: 2,
+                  children: [
+                    GaugeCustom(
+                      text: "pH",
+                      value: model.node!.ph,
+                      minvalue: 0,
+                      maxvalue: 12,
+                    ),
+                    GaugeCustom(
+                      text: "TDS",
+                      value: model.node!.tds,
+                      minvalue: 0,
+                      maxvalue: 20,
+                    ),
+                    GaugeCustom(
+                      text: "Temperature",
+                      value: model.node!.temp,
+                      minvalue: -10,
+                      maxvalue: 60,
+                    ),
+                  ],
+                )
+              : const Center(child: CircularProgressIndicator()),
         );
       },
       viewModelBuilder: () => HomeViewModel(),
+    );
+  }
+}
+
+class GaugeCustom extends StatelessWidget {
+  final String text;
+  final double value;
+  final double minvalue;
+  final double maxvalue;
+
+  const GaugeCustom(
+      {super.key,
+      required this.text,
+      required this.value,
+      required this.minvalue,
+      required this.maxvalue});
+
+  /// Build method of your widget.
+  @override
+  Widget build(BuildContext context) {
+    // Create animated radial gauge.
+    // All arguments changes will be automatically animated.
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Text(text),
+              Expanded(
+                child: AnimatedRadialGauge(
+                  duration: const Duration(seconds: 1),
+                  curve: Curves.elasticOut,
+                  radius: 100,
+                  value: value,
+                  builder: (context, child, value) => RadialGaugeLabel(
+                    value: value,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  axis: GaugeAxis(
+                    min: minvalue,
+                    max: maxvalue,
+                    degrees: 180,
+                    style: const GaugeAxisStyle(
+                      thickness: 20,
+                      background: Color(0xFFDFE2EC),
+                      segmentSpacing: 4,
+                    ),
+
+                    /// Define the pointer that will indicate the progress (optional).
+                    pointer: const GaugePointer.triangle(
+                      width: 16,
+                      height: 20,
+                      color: Color(0xFF193663),
+                    ),
+
+                    /// Define the progress bar (optional).
+                    progressBar: const GaugeProgressBar.rounded(
+                      color: Color(0xFFB4C2F8),
+                    ),
+
+                    /// Define axis segments (optional).
+                    // segments: [
+                    //   GaugeSegment(
+                    //     from: 0,
+                    //     to: 33.3,
+                    //     color: Color(0xFFD9DEEB),
+                    //     cornerRadius: Radius.zero,
+                    //   ),
+                    //   GaugeSegment(
+                    //     from: 33.3,
+                    //     to: 66.6,
+                    //     color: Color(0xFFD9DEEB),
+                    //     cornerRadius: Radius.zero,
+                    //   ),
+                    //   GaugeSegment(
+                    //     from: 66.6,
+                    //     to: 100,
+                    //     color: Color(0xFFD9DEEB),
+                    //     cornerRadius: Radius.zero,
+                    //   ),
+                    // ],
+                  ),
+                ),
+              ),
+              Text(
+                  "${value} ${text == "Temperature" ? "°C" : text == "TDS" ? "PPM" : ""}"),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

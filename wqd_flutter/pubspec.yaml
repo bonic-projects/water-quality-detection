@@ -12,6 +12,7 @@ dependencies:
 
   #ui
   lottie: ^2.7.0
+  gauge_indicator: ^0.4.3
 
   #stacked -
   stacked: ^3.4.1
