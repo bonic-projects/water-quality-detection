@@ -8,7 +8,7 @@ import '../../../app/app.router.dart';
 import '../../../services/database_service.dart';
 import '../../../services/user_service.dart';
 
-class HomeViewModel extends BaseViewModel {
+class HomeViewModel extends  ReactiveViewModel {
   final log = getLogger('HomeViewModel');
 
   // final _snackBarService = locator<SnackbarService>();
@@ -17,6 +17,8 @@ class HomeViewModel extends BaseViewModel {
   final _databaseService = locator<DatabaseService>();
 
   DeviceReading? get node => _databaseService.node;
+  @override
+  List<ListenableServiceMixin> get listenableServices => [_databaseService];
 
   void logout() {
     _userService.logout();
