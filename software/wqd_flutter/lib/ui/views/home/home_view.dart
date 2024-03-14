@@ -12,49 +12,46 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
-      viewModelBuilder: () => HomeViewModel(),
-      onViewModelReady: (model) => model.loadData(), // Trigger data loading when model is ready
+      // onViewModelReady: (model) => model.onModelReady(),
       builder: (context, model, child) {
+        // print(model.node?.lastSeen);
         return Scaffold(
           appBar: AppBar(
             title: const Text('WQD'),
             actions: [
               const IsOnlineWidget(),
               IconButton(
-                onPressed: model.logout,
-                icon: const Icon(Icons.logout),
-              ),
+                  onPressed: model.logout, icon: const Icon(Icons.logout)),
             ],
           ),
-          body: model.isBusy
-              ? const Center(child: CircularProgressIndicator()) // Show progress indicator while loading
-              : model.hasData // Check if data is available
-                  ? GridView.count(
-                      crossAxisCount: 2,
-                      children: [
-                        GaugeCustom(
-                          text: "pH",
-                          value: model.node!.ph,
-                          minvalue: 0,
-                          maxvalue: 12,
-                        ),
-                        GaugeCustom(
-                          text: "TDS",
-                          value: model.node!.tds,
-                          minvalue: 0,
-                          maxvalue: 20,
-                        ),
-                        GaugeCustom(
-                          text: "Temperature",
-                          value: model.node!.temp,
-                          minvalue: -10,
-                          maxvalue: 60,
-                        ),
-                      ],
-                    )
-                  : const Center(child: Text('No data available')), // Display message if no data is available
+          body: model.node != null
+              ? GridView.count(
+                  crossAxisCount: 2,
+                  children: [
+                    GaugeCustom(
+                      text: "pH",
+                      value: model.node!.ph,
+                      minvalue: 0,
+                      maxvalue: 12,
+                    ),
+                    GaugeCustom(
+                      text: "TDS",
+                      value: model.node!.tds,
+                      minvalue: 0,
+                      maxvalue: 20,
+                    ),
+                    GaugeCustom(
+                      text: "Temperature",
+                      value: model.node!.temp,
+                      minvalue: -10,
+                      maxvalue: 60,
+                    ),
+                  ],
+                )
+              :  const Center(child: CircularProgressIndicator()),
         );
       },
+      viewModelBuilder: () => HomeViewModel(),
     );
   }
 }

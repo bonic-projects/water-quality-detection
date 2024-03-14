@@ -32,7 +32,7 @@ class LoginViewModel extends FormViewModel {
       );
       if (result.user != null) {
         _userService.fetchUser();
-        _navigationService.pushNamedAndRemoveUntil(Routes.startupView);
+        _navigationService.pushNamedAndRemoveUntil(Routes.homeView);
       } else {
         log.e("Error: ${result.errorMessage}");
 

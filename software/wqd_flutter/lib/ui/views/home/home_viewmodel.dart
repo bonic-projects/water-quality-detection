@@ -8,7 +8,7 @@ import '../../../app/app.router.dart';
 import '../../../services/database_service.dart';
 import '../../../services/user_service.dart';
 
-class HomeViewModel extends ReactiveViewModel {
+class HomeViewModel extends  ReactiveViewModel {
   final log = getLogger('HomeViewModel');
 
   // final _snackBarService = locator<SnackbarService>();
@@ -25,16 +25,4 @@ class HomeViewModel extends ReactiveViewModel {
     _navigationService.replaceWithLoginRegisterView();
   }
 
-  Future<void> loadData() async {
-    try {
-      // Assuming you have a method in DatabaseService to load data
-      await _databaseService
-          .setupNodeListening; // Replace this with your actual data loading logic
-    } catch (e) {
-      log.e('Error loading data: $e');
-      // Handle error loading data
-    }
-  }
-
-  bool get hasData => node != null;
 }

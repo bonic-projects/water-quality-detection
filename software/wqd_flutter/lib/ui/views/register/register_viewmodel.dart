@@ -62,7 +62,7 @@ class RegisterViewModel extends FormViewModel {
         ));
         if (error == null) {
           _userService.fetchUser();
-          _navigationService.pushNamedAndRemoveUntil(Routes.startupView);
+          _navigationService.pushNamedAndRemoveUntil(Routes.homeView);
         } else {
           log.i("Firebase error");
 
